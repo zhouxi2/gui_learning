@@ -9,8 +9,8 @@ def print_hi():
 
 button1 = tkinter.Button(root)
 button1.config(text="morning tea soon",
-               bg="blue",
-               fg="hotpink",
+               bg="lightblue",
+               fg="lightpink",
                font=("papyrus", "50"),
                command=print_hi)
 button1.grid()
