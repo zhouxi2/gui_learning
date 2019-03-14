@@ -96,23 +96,35 @@ def open_list(list_name):
 
 
 lbl_title = Label(root, text="Notes")
-lbl_title.config(font=("Calibri", "30"), bg="black", fg="white", width=20)
+lbl_title.config(font=("Calibri", "30"), bg="black", fg="white", width=18)
 lbl_title.grid(row=0, sticky=N + S + E + W)
 
 btn_newnote = Button(root, text="+ New Note", command=lambda: open_new_note())
 btn_newnote.config(bg="black", fg="white")
 btn_newnote.grid(row=1, sticky=W)
 
-btn_shopping = Button(root, text="+ Shopping List", command=lambda: open_list("Shopping"))
-btn_shopping.config(bg="black", fg="white", width=20)
-btn_shopping.grid(row=2, sticky=E + W)
+btn_shopping_new = Button(root, text="Shopping List", command=lambda: open_list("Shopping"))
+btn_shopping_new.config(bg="black", fg="white", width=20)
+btn_shopping_new.grid(column=0,row=1, sticky=E + W)
 
-btn_todo = Button(root, text="+ To Do List", command=lambda: open_list("To_do_list"))
+btn_shopping = Button(root, text="+", command=lambda: open_list("Shopping"))
+btn_shopping.config(bg="white", fg="black", width=20)
+btn_shopping.grid(column=1,row=1, sticky=E + W)
+
+btn_todo = Button(root, text="To Do List", command=lambda: open_list("To_do_list"))
 btn_todo.config(bg="black", fg="white", width=20)
-btn_todo.grid(row=3, sticky=E + W)
+btn_todo.grid(column=0,row=2, sticky=E + W)
 
-btn_homework = Button(root, text="+ Homework WK1", command=lambda: open_list("Homework_WK1"))
+btn_todo_new = Button(root, text="+", command=lambda: open_list("Shopping"))
+btn_todo_new.config(bg="white", fg="black", width=20)
+btn_todo_new.grid(column=1,row=2, sticky=E + W)
+
+btn_homework = Button(root, text="Homework WK1", command=lambda: open_list("Homework_WK1"))
 btn_homework.config(bg="black", fg="white", width=20)
-btn_homework.grid(row=4, sticky=E + W)
+btn_homework.grid(column=0,row=3, sticky=E + W)
+
+btn_homework_new = Button(root, text="+", command=lambda: open_list("Shopping"))
+btn_homework_new.config(bg="white", fg="black", width=20)
+btn_homework_new.grid(column=1,row=3, sticky=E + W)
 
 root.mainloop()
