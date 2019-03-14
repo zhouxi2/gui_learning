@@ -25,14 +25,11 @@ notes = []
 
 
 def save_note(window, title, body, category="Shopping"):
-    print("Save note")
-    print(title)
-    print(body.strip())
-    print(category)
 
-    new_note = Note(title.title().strip(),
-                    body.title().strip(),
-                    category.title().strip())
+    new_note = Note(title.capitalize().strip(),
+                    body.capitalize().strip(),
+                    category.capitalize().strip())
+
     notes.append(new_note)
     print("Title:{}".format(new_note.get_title()))
     print("Body:{}".format(new_note.get_text()))
@@ -40,10 +37,10 @@ def save_note(window, title, body, category="Shopping"):
     window.destroy()
 
 
-def open_new_note():
+def open_new_note(category):
     print("Open new not window")
     title_value = StringVar()
-    text_value = StringVar()
+
 
     new_note_window = Toplevel(root)
 
@@ -75,56 +72,54 @@ def open_new_note():
 
     save_button = Button(button_frame,
                          text="Save",
-                         command=lambda: save_note(new_note_window, title_value.get(), note_text.get(1.0, END)))
+                         command=lambda: save_note(new_note_window, title_value.get(), note_text.get(1.0, END),
+                                                   category))
     save_button.config(bg="black", fg="white")
     save_button.grid(row=0, column=2, sticky=E)
 
 
-def open_list(list_name):
-    print("Open {}".format(list_name))
+def open_list(list_category):
+    print("Open {}".format(list_category))
     list_window = Toplevel(root)
-    list_window.title(list_name)
+    list_window.title(list_category)
+    list_window.geometry("600x400")
 
     for note in notes:
         title = note.get_title()
         body = note.get_text()
         category = note.get_category()
 
-        note_text = "***{}***\n{}\n".format(title,body)
-
-        Label(list_window, text=note_text).grid(sticky=W)
+        note_text = "***{}***\n{}\n".format(title, body)
+        if category == list_category:
+          Label(list_window, text=note_text).grid(sticky=W)
 
 
 lbl_title = Label(root, text="Notes")
 lbl_title.config(font=("Calibri", "30"), bg="black", fg="white", width=18)
 lbl_title.grid(row=0, sticky=N + S + E + W)
 
-btn_newnote = Button(root, text="+ New Note", command=lambda: open_new_note())
-btn_newnote.config(bg="black", fg="white")
-btn_newnote.grid(row=1, sticky=W)
-
 btn_shopping_new = Button(root, text="Shopping List", command=lambda: open_list("Shopping"))
-btn_shopping_new.config(bg="black", fg="white", width=20)
-btn_shopping_new.grid(column=0,row=1, sticky=E + W)
+btn_shopping_new.config(bg="black", fg="white")
+btn_shopping_new.grid(column=0, row=1, sticky=E + W)
 
-btn_shopping = Button(root, text="+", command=lambda: open_list("Shopping"))
-btn_shopping.config(bg="white", fg="black", width=20)
-btn_shopping.grid(column=1,row=1, sticky=E + W)
+btn_shopping = Button(root, text="+", command=lambda: open_new_note("Shopping"))
+btn_shopping.config(bg="white", fg="black")
+btn_shopping.grid(column=1, row=1, sticky=E + W)
 
 btn_todo = Button(root, text="To Do List", command=lambda: open_list("To_do_list"))
-btn_todo.config(bg="black", fg="white", width=20)
-btn_todo.grid(column=0,row=2, sticky=E + W)
+btn_todo.config(bg="black", fg="white")
+btn_todo.grid(column=0, row=2, sticky=E + W)
 
-btn_todo_new = Button(root, text="+", command=lambda: open_list("Shopping"))
-btn_todo_new.config(bg="white", fg="black", width=20)
-btn_todo_new.grid(column=1,row=2, sticky=E + W)
+btn_todo_new = Button(root, text="+", command=lambda: open_new_note("Shopping"))
+btn_todo_new.config(bg="white", fg="black")
+btn_todo_new.grid(column=1, row=2, sticky=E + W)
 
 btn_homework = Button(root, text="Homework WK1", command=lambda: open_list("Homework_WK1"))
-btn_homework.config(bg="black", fg="white", width=20)
-btn_homework.grid(column=0,row=3, sticky=E + W)
+btn_homework.config(bg="black", fg="white")
+btn_homework.grid(column=0, row=3, sticky=E + W)
 
-btn_homework_new = Button(root, text="+", command=lambda: open_list("Shopping"))
-btn_homework_new.config(bg="white", fg="black", width=20)
-btn_homework_new.grid(column=1,row=3, sticky=E + W)
+btn_homework_new = Button(root, text="+", command=lambda: open_new_note("Shopping"))
+btn_homework_new.config(bg="white", fg="black")
+btn_homework_new.grid(column=1, row=3, sticky=E + W)
 
 root.mainloop()
